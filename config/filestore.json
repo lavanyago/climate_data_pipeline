@@ -1,0 +1,21 @@
+{
+    "csv":{
+        "cities":"./filestore/datasource/cities.csv",
+        "climate":"./filestore/datasource/climate.csv"
+    },
+    "landing":{
+        "cities":"./filestore/datasource/cities.csv",
+        "climate":"./filestore/datasource/climate.csv"
+    },
+    "raw":{
+        "cities":"./filestore/datasource/cities.csv",
+        "climate":"./filestore/datasource/climate.csv"
+    },
+    "curated":{
+        "climate_analysis":"./filestore/curated/summary_df.csv"
+    },
+    "logger": {
+        "landing_zone_logger": "./filestore/logger/landing_zone_logger.log",
+        "raw_zone_logger": "./filestore/logger/raw_zone_logger.log"
+    }
+}
