@@ -4,12 +4,12 @@
         "climate":"./filestore/datasource/climate.csv"
     },
     "landing":{
-        "cities":"./filestore/datasource/cities.csv",
-        "climate":"./filestore/datasource/climate.csv"
+        "cities":"./filestore/landing/cities.csv",
+        "climate":"./filestore/landing/climate.csv"
     },
     "raw":{
-        "cities":"./filestore/datasource/cities.csv",
-        "climate":"./filestore/datasource/climate.csv"
+        "cities":"./filestore/raw/cities.csv",
+        "climate":"./filestore/raw/climate.csv"
     },
     "curated":{
         "climate_analysis":"./filestore/curated/summary_df.csv"
