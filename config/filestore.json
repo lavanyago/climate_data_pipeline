@@ -4,8 +4,8 @@
         "climate":"./filestore/datasource/climate.csv"
     },
     "landing":{
-        "cities":"./filestore/landing/cities.csv",
-        "climate":"./filestore/landing/climate.csv"
+        "cities":"./filestore/landing/cities.parquet",
+        "climate":"./filestore/landing/climate.parquet"
     },
     "raw":{
         "cities":"./filestore/raw/cities.csv",

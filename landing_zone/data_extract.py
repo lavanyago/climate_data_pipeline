@@ -2,7 +2,9 @@ import pandas as pd
 import logger as log
 import logging as log_config
 import json
-from pathlib import Path
+import pyarrow as pa
+import pyarrow.parquet as pq
+
 
 log_location=json.load(open('config/filestore.json'))
 
@@ -21,7 +23,8 @@ def readCsv(file):
     return df
 
 def write_to_landing_zone(df,df_name):
-    df.to_csv(log_location['landing'][df_name], index = False)
+    table = pa.Table.from_pandas(df)
+    pq.write_table(table, log_location['landing'][df_name])
     log.write(f'{df_name} added to landing zone with shape {df.shape}')
 
 
