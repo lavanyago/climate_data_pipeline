@@ -2,8 +2,8 @@ import pandas as pd
 import logger as log
 import logging as log_config
 import json
-import pyarrow as pa
-import pyarrow.parquet as pq
+import snappy
+import fastparquet
 
 
 log_location=json.load(open('config/filestore.json'))
@@ -18,13 +18,12 @@ def readCsv(file):
                            datefmt='%Y-%m-%d %H:%M:%S'
                             )
     df = pd.read_csv(file)
-    log.write (f'{file} has missing values as listed below with shape {df.shape}:')
-    log.write (df.isna().sum())
+    log.write ( f'{file} has missing values as listed below with shape {df.shape}:')
+    log.write ( df.isna().sum())
     return df
 
 def write_to_landing_zone(df,df_name):
-    table = pa.Table.from_pandas(df)
-    pq.write_table(table, log_location['landing'][df_name])
-    log.write(f'{df_name} added to landing zone with shape {df.shape}')
+    df.to_parquet(log_location['landing'][df_name], compression='snappy')
+    log.write( f'{df_name} added to landing zone with shape {df.shape} in parquet format')
 
 

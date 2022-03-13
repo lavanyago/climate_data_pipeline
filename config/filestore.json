@@ -8,8 +8,8 @@
         "climate":"./filestore/landing/climate.parquet"
     },
     "raw":{
-        "cities":"./filestore/raw/cities.csv",
-        "climate":"./filestore/raw/climate.csv"
+        "cities":"./filestore/raw/cities.parquet",
+        "climate":"./filestore/raw/climate.parquet"
     },
     "curated":{
         "climate_analysis":"./filestore/curated/summary_df.csv"
