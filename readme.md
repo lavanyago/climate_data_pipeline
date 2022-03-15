@@ -18,7 +18,7 @@ Curated Zone:
 
 ### Instructions to run the program
 - Dependencies
-  `pip install requirements.txt`
+  `pip install -r requirements.txt`
 - files are sourced and stored as per definition in `config/filestore.json`
 - run below from terminal
    `python app.py 'DATE' `
