@@ -14,23 +14,22 @@ def app(date):
     climate_df = lzde.readCsv(datasources['csv']['climate'])
     # write to landing  zone
     # climate_df['LOCAL_DATE']=pd.to_datetime(climate_df['LOCAL_DATE']).dt.date
-    print(date)
+
     lzde.write_to_landing_zone(cities_df, 'cities')
-    lzde.write_to_landing_zone(climate_df[climate_df['LOCAL_DATE']==date], 'climate')
-
-
+    lzde.write_to_landing_zone(climate_df, 'climate')
 
     # read from landing zone & write to raw zone
     cities_df = rzde.readParquet(datasources['landing']['cities'])
     climate_df = rzde.readParquet(datasources['landing']['climate'])
 
+    climate_df['LOCAL_DATE'] = pd.to_datetime(climate_df['LOCAL_DATE'])
     specific_columns = ['lng', 'lat', 'STATION_NAME', 'CLIMATE_IDENTIFIER', 'ID', 'LOCAL_DATE', 'PROVINCE_CODE', 'LOCAL_YEAR',
                         'LOCAL_MONTH', 'LOCAL_DAY', 'MEAN_TEMPERATURE', 'MEAN_TEMPERATURE_FLAG']
 
     climate_df_without_na = dp.fill_missing_values(climate_df[specific_columns])
 
     specific_columns = ['lng', 'lat', 'STATION_NAME', 'CLIMATE_IDENTIFIER', 'ID', 'LOCAL_DATE', 'PROVINCE_CODE', 'LOCAL_YEAR',
-                        'LOCAL_MONTH', 'LOCAL_DAY', 'MEAN_TEMPERATURE_FILLED']
+                        'LOCAL_MONTH', 'LOCAL_DAY', 'MEAN_TEMPERATURE', 'MEAN_TEMPERATURE_FLAG', 'MEAN_TEMPERATURE_FILLED']
 
     rzde.write_to_raw_zone(climate_df_without_na[specific_columns],'climate')
     rzde.write_to_raw_zone(cities_df,'cities')
@@ -47,7 +46,8 @@ def app(date):
     observatory_city_df = observatory_city_df.merge(cities_df_raw, on = ['city'], how="left")
 
     #get Mean & Median by City
-    cdp.city_wise_mean_median(observatory_city_df).to_csv(datasources['curated']['climate_analysis'],index=False)
+    cdp.city_wise_mean_median(observatory_city_df[(observatory_city_df['LOCAL_DATE']==date)]
+            ).to_csv(datasources['curated']['climate_analysis'],index=False)
 
 
 if __name__ == '__main__':

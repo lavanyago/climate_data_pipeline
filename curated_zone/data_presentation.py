@@ -43,7 +43,9 @@ def merge_climate_cities_datasets(climate,cities):
     return df_dist_unpv[df_dist_unpv['MIN_DISTANCE'] == df_dist_unpv['DISTANCE']].iloc[:,0:3]
 
 def city_wise_mean_median(df):
-    df['CITY_MEAN'] = df.groupby(['city'])['MEAN_TEMPERATURE_FILLED'].transform('mean')
-    df['CITY_MEDIAN'] = df.groupby(['city'])['MEAN_TEMPERATURE_FILLED'].transform('median')
+    df['CITY_MEAN'] = df.groupby(['city','LOCAL_DATE'])['MEAN_TEMPERATURE_FILLED'].transform('mean')
+    df['CITY_MEDIAN'] = df.groupby(['city','LOCAL_DATE'])['MEAN_TEMPERATURE_FILLED'].transform('median')
+    df['CITY_MEAN'] = round(df['CITY_MEAN'],2)
+    df['CITY_MEDIAN'] = round(df['CITY_MEDIAN'],2)
     selected_columns=['city','LOCAL_DATE','CITY_MEAN','CITY_MEDIAN']
     return df[selected_columns].drop_duplicates()
