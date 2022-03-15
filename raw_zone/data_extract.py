@@ -17,4 +17,4 @@ def readParquet(file):
 
 def write_to_raw_zone(df,df_name):
     df.to_parquet(log_location['raw'][df_name], compression='snappy')
-    log.write( f'{df_name} added to landing zone with shape {df.shape} in parquet format')
+    log.write( f'{df_name} added to raw zone with shape {df.shape} in parquet format')
