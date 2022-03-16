@@ -1,10 +1,14 @@
+Part 1
+
 # Climate data analysis
 
 Data pipeline for giving city level mean and median observations for a specific day
 
 ### Approach
+(The pipeline is designed keeping scaling in mind)
+
 Landing zone:
-- Source file and put it in landing zone in parquet format (snappy compression)
+- Source file and put it in landing zone in parquet format (snappy compression) 
 
 Raw Zone
 - Write to Raw zone with appropriate datatypes 
@@ -24,7 +28,11 @@ Curated Zone:
    `python app.py 'DATE' `
 
 ### Opportunities
-- Current final output just measures mean and median for a date it can be for the month / week
+- Current final output just measures mean and median for a date it can be for cadence(week / month / season)
+	- vs province and also country
+	- Identifying coldest/hottest city/province
+- Based on the date we can caluculate season and output snow fall/rain
+- Forecasting future snow fall/rain /temperature for next week
 - Each observatory recording may help multiple closer cities
 - Advanced imputation techniques can be used for imputing missing values and outliers
 - Trends can be analyzed on population in summer and winter if additional data is given 
